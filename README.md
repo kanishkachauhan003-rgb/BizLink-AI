@@ -152,7 +152,13 @@ bizlink-ai/
 │   ├── api/
 │   │   └── search/
 │   │       └── route.ts
-│   ├── (main)/
+│   ├── business/
+│   │   └── [id]/
+│   │       └── page.tsx
+│   ├── details/
+│   │   └── [type]/
+│   │       └── [id]/
+│   │           └── page.tsx
 │   ├── material/
 │   │   └── [id]/
 │   │       └── page.tsx
@@ -177,8 +183,6 @@ bizlink-ai/
 ├── types/
 │   └── index.ts
 ├── .gitignore
-├── AGENTS.md
-├── CLAUDE.md
 ├── eslint.config.mjs
 ├── next-env.d.ts
 ├── next.config.ts
