@@ -1,36 +1,302 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BizLink AI
+
+Packaging intelligence for small businesses.
+
+## Overview
+
+BizLink AI is a packaging discovery and planning platform designed for small businesses that need practical packaging guidance without guesswork. The app helps users search for suitable packaging materials, boxes, and accessories based on their business type, product category, and packaging needs.
+
+The platform is built around a database-first approach: product suggestions are sourced from the application’s internal packaging dataset, while contextual AI-style guidance helps explain the trade-offs and recommend a sensible next step. This keeps the experience grounded in actual business data instead of generating unsupported or fictional products.
+
+## Problem Statement
+
+Small businesses often struggle to choose the right packaging materials, quantities, and presentation choices for their products. Common challenges include matching packaging to the product type, staying within budget, balancing protection with presentation, and understanding minimum order requirements or cost trade-offs without a clear decision framework.
+
+For makers, retailers, and boutique brands, this creates friction in both customer experience and operational cost. A packaging decision that looks ideal on paper may be too expensive, too fragile, or unsuitable for the product category.
+
+## Solution
+
+BizLink AI helps simplify this process by bringing the packaging search and planning workflow into one place. Users can search by business need, apply filters, compare packaging options, and build a plan using real records from the database. The app also includes goal-based ranking and cost-aware planning so recommendations can be tailored to different priorities such as budget, sustainability, or premium presentation.
+
+## Key Features
+
+### Smart Packaging Search
+
+- Search by business need, such as packaging for Bakery, Crochet, Jewellery, Candles, and Rakhi
+- Quick search suggestions for common packaging scenarios
+- Business-specific query handling through the app search flow
+- Search results grounded in the project’s internal packaging dataset
+
+### Database-Backed Recommendations
+
+- Materials, boxes, and accessories pulled from the project database/seed data
+- Product matching based on category, business fit, material type, and other filters
+- Recommendation lists for packaging-related products and add-ons
+- Supplier and guide information associated with results
+
+### Packaging Goal Optimization
+
+- Goal selector for Best Value, Eco-Friendly, and Premium
+- Goal-based recommendation prioritization without inventing new products
+- Goal-aware suggestions that influence ranking and guidance copy
+
+### Budget-Aware Planning
+
+- Packaging budget input for ongoing plan calculation
+- Budget progress tracking and over-budget status
+- Real-time total updates for selected packaging items
+- Cost-based guidance within the live summary experience
+
+### Smart Filters
+
+- Category filtering
+- Material and supplier filtering
+- Eco-Friendly, Reusable, and Recyclable toggles
+- Max price limit filtering
+- Availability-based filtering
+
+### Packaging Plan Builder
+
+- Add to Plan interactions for selected items
+- Quantity controls and minimum order quantity handling
+- Live summary of selected materials, recommendations, and accessories
+- Estimated total calculation based on chosen quantities
+- Plan completeness tracking for primary packaging, protection, and branding/finishing
+
+### AI Packaging Insight
+
+- Contextual packaging guidance displayed alongside search results
+- Recommendations grounded in current database results and selected plan items
+- Explanation text designed to support decision-making rather than fabricate unavailable products
+
+### User Experience
+
+- Responsive UI for search and result browsing
+- Light and dark theme support
+- Language selector support
+- Premium dashboard-style interface for packaging discovery and planning
+
+## How BizLink AI Works
+
+```text
+Business requirement
+        ↓
+Search / query
+        ↓
+Database matching
+        ↓
+Filters + packaging goal
+        ↓
+Ranked packaging recommendations
+        ↓
+Contextual guidance
+        ↓
+User builds a packaging plan
+```
+
+The workflow begins with a business requirement such as packaging for Jewellery or Bakery, then narrows results using filters and goal preferences. Relevant product records are retrieved from the app’s database-backed data, ranked by relevance and suitability, and presented alongside AI-style guidance that explains the reasoning behind the recommendations.
+
+## Packaging Goals
+
+The project includes three packaging optimization goals:
+
+- Best Value: prioritizes practical, affordable options from existing results
+- Eco-Friendly: prioritizes products marked as eco-conscious, reusable, or recyclable where available
+- Premium: prioritizes presentation-focused and high-end packaging options already present in the dataset
+
+These goals influence the ranking and explanatory guidance, but they do not generate fake products. The app continues to rely on the actual database records available in the project.
+
+## AI + Database Architecture
+
+BizLink AI follows a database-first architecture:
+
+- The database is the source of truth for product inventory, materials, accessories, and supplier information.
+- Search and ranking are based on real records already present in the app.
+- AI guidance is used for explanation, prioritization, and contextual suggestion, not for inventing unavailable products.
+- Recommendations are therefore grounded in searchable and verifiable data rather than generated inventory.
+
+This keeps the system practical, transparent, and useful for real business decision-making.
+
+## Tech Stack
+
+### Frontend
+
+- Next.js 16.3.0
+- React 19.2.8
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Lucide React
+
+### Backend
+
+- Next.js App Router API routes
+- Server-side data handling through search APIs
+
+### Database
+
+- MongoDB via the official MongoDB Node.js driver
+- Database-backed search and seed data workflow
+
+### AI
+
+- Contextual suggestion and explanation patterns within the app experience
+- Guidance is tied to current search results and dataset records
+
+### Development tools
+
+- ESLint
+- TypeScript compiler
+- Next.js build tooling
+
+## Project Structure
+
+```text
+bizlink-ai/
+├── app/
+│   ├── api/
+│   │   └── search/
+│   │       └── route.ts
+│   ├── (main)/
+│   ├── material/
+│   │   └── [id]/
+│   │       └── page.tsx
+│   ├── search/
+│   │   ├── loading.tsx
+│   │   └── page.tsx
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── navigation.tsx
+│   ├── profile-readiness.tsx
+│   ├── providers.tsx
+│   ├── search-results.tsx
+│   └── search-shell.tsx
+├── lib/
+│   ├── db.ts
+│   ├── i18n.ts
+│   ├── mongodb.ts
+│   ├── query-parser.ts
+│   ├── search-service.ts
+│   └── seed-data.ts
+├── public/
+├── types/
+│   └── index.ts
+├── .gitignore
+├── AGENTS.md
+├── CLAUDE.md
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package.json
+├── postcss.config.mjs
+├── README.md
+├── tsconfig.json
+└── package-lock.json
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js compatible with the current Next.js setup
+- npm
+- MongoDB connection access if you are running the database-backed flow locally
+
+### 1) Clone the repository
+
+```bash
+git clone https://github.com/kanishkachauhan003-rgb/BizLink-AI.git
+cd BizLink-AI
+```
+
+### 2) Install dependencies
+
+```bash
+npm install
+```
+
+### 3) Configure environment variables
+
+Create your local environment file and add the required values for the existing MongoDB configuration.
+
+### 4) Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open the app in your browser at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 5) Production build
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 6) Start the production server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 7) Linting
 
-## Deploy on Vercel
+```bash
+npm run lint
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Environment Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The project references environment variables for MongoDB in the database setup code.
+
+```env
+MONGODB_URI=your_mongodb_uri_here
+MONGODB_DB=bizlink-ai
+```
+
+> Do not commit real credentials, tokens, or connection strings to the repository.
+
+## Example Searches
+
+- Packaging for Crochet
+- Packaging for Jewellery
+- Packaging for Bakery
+- Packaging for Candles
+- Packaging for Rakhi
+- Packaging for Chocolate
+- Packaging for Gift Products
+
+## Future Improvements
+
+The following are realistic future extensions, not current features:
+
+- Additional supplier and order management workflows
+- Expanded product datasets for more business categories
+- More advanced packaging recommendation logic based on product dimensions and shipping needs
+- Enhanced analytics for packaging cost and sustainability tracking
+- Improved personalization and saved packaging plans
+
+## Author
+
+Kanishka Chauhan
+
+LinkedIn: https://www.linkedin.com/in/kanishkachauhan003
+
+GitHub: https://github.com/kanishkachauhan003-rgb
+
+LeetCode: https://leetcode.com/u/kanishkachauhan003/
+
+---
+
+Built with a focus on practical packaging discovery, grounded recommendation logic, and a cleaner shopping/planning experience for small businesses.
+
+## Acknowledgement
+
+Thank you for exploring BizLink AI. This project reflects a practical approach to packaging intelligence, combining structured data, business-specific matching, and lighter AI guidance to help simplify packaging decisions.
+
