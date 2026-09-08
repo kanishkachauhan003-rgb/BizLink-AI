@@ -6,7 +6,7 @@ Packaging intelligence for small businesses.
 
 BizLink AI is a packaging discovery and planning platform designed for small businesses that need practical packaging guidance without guesswork. The app helps users search for suitable packaging materials, boxes, and accessories based on their business type, product category, and packaging needs.
 
-The platform is built around a database-first approach: product suggestions are sourced from the application’s internal packaging dataset, while contextual AI-style guidance helps explain the trade-offs and recommend a sensible next step. This keeps the experience grounded in actual business data instead of generating unsupported or fictional products.
+The platform uses the application's local static packaging dataset as its data source, while contextual AI-style guidance helps explain the trade-offs and recommend a sensible next step. This keeps the experience grounded in actual business data instead of generating unsupported or fictional products.
 
 ## Problem Statement
 
@@ -16,7 +16,7 @@ For makers, retailers, and boutique brands, this creates friction in both custom
 
 ## Solution
 
-BizLink AI helps simplify this process by bringing the packaging search and planning workflow into one place. Users can search by business need, apply filters, compare packaging options, and build a plan using real records from the database. The app also includes goal-based ranking and cost-aware planning so recommendations can be tailored to different priorities such as budget, sustainability, or premium presentation.
+BizLink AI helps simplify this process by bringing the packaging search and planning workflow into one place. Users can search by business need, apply filters, compare packaging options, and build a plan using records from the local static seed dataset. The app also includes goal-based ranking and cost-aware planning so recommendations can be tailored to different priorities such as budget, sustainability, or premium presentation.
 
 ## Key Features
 
@@ -27,9 +27,9 @@ BizLink AI helps simplify this process by bringing the packaging search and plan
 - Business-specific query handling through the app search flow
 - Search results grounded in the project’s internal packaging dataset
 
-### Database-Backed Recommendations
+### Seed-Data Recommendations
 
-- Materials, boxes, and accessories pulled from the project database/seed data
+- Materials, boxes, and accessories pulled from the project's local static seed data
 - Product matching based on category, business fit, material type, and other filters
 - Recommendation lists for packaging-related products and add-ons
 - Supplier and guide information associated with results
@@ -66,7 +66,7 @@ BizLink AI helps simplify this process by bringing the packaging search and plan
 ### AI Packaging Insight
 
 - Contextual packaging guidance displayed alongside search results
-- Recommendations grounded in current database results and selected plan items
+- Recommendations grounded in current seed-data results and selected plan items
 - Explanation text designed to support decision-making rather than fabricate unavailable products
 
 ### User Experience
@@ -83,7 +83,7 @@ Business requirement
         ↓
 Search / query
         ↓
-Database matching
+Local seed-data matching
         ↓
 Filters + packaging goal
         ↓
@@ -94,7 +94,7 @@ Contextual guidance
 User builds a packaging plan
 ```
 
-The workflow begins with a business requirement such as packaging for Jewellery or Bakery, then narrows results using filters and goal preferences. Relevant product records are retrieved from the app’s database-backed data, ranked by relevance and suitability, and presented alongside AI-style guidance that explains the reasoning behind the recommendations.
+The workflow begins with a business requirement such as packaging for Jewellery or Bakery, then narrows results using filters and goal preferences. Relevant product records are retrieved from the app's local static seed data, ranked by relevance and suitability, and presented alongside AI-style guidance that explains the reasoning behind the recommendations.
 
 ## Packaging Goals
 
@@ -104,13 +104,13 @@ The project includes three packaging optimization goals:
 - Eco-Friendly: prioritizes products marked as eco-conscious, reusable, or recyclable where available
 - Premium: prioritizes presentation-focused and high-end packaging options already present in the dataset
 
-These goals influence the ranking and explanatory guidance, but they do not generate fake products. The app continues to rely on the actual database records available in the project.
+These goals influence the ranking and explanatory guidance, but they do not generate fake products. The app continues to rely on the actual seed-data records available in the project.
 
-## AI + Database Architecture
+## AI + Seed-Data Architecture
 
-BizLink AI follows a database-first architecture:
+BizLink AI uses a local static seed-data architecture:
 
-- The database is the source of truth for product inventory, materials, accessories, and supplier information.
+- Local static seed data is the source of truth for product inventory, materials, accessories, and supplier information.
 - Search and ranking are based on real records already present in the app.
 - AI guidance is used for explanation, prioritization, and contextual suggestion, not for inventing unavailable products.
 - Recommendations are therefore grounded in searchable and verifiable data rather than generated inventory.
@@ -132,11 +132,6 @@ This keeps the system practical, transparent, and useful for real business decis
 
 - Next.js App Router API routes
 - Server-side data handling through search APIs
-
-### Database
-
-- MongoDB via the official MongoDB Node.js driver
-- Database-backed search and seed data workflow
 
 ### AI
 
@@ -174,9 +169,7 @@ bizlink-ai/
 │   ├── search-results.tsx
 │   └── search-shell.tsx
 ├── lib/
-│   ├── db.ts
 │   ├── i18n.ts
-│   ├── mongodb.ts
 │   ├── query-parser.ts
 │   ├── search-service.ts
 │   └── seed-data.ts
@@ -202,7 +195,6 @@ bizlink-ai/
 
 - Node.js compatible with the current Next.js setup
 - npm
-- MongoDB connection access if you are running the database-backed flow locally
 
 ### 1) Clone the repository
 
@@ -217,11 +209,7 @@ cd BizLink-AI
 npm install
 ```
 
-### 3) Configure environment variables
-
-Create your local environment file and add the required values for the existing MongoDB configuration.
-
-### 4) Start the development server
+### 3) Start the development server
 
 ```bash
 npm run dev
@@ -233,34 +221,27 @@ Then open the app in your browser at:
 http://localhost:3000
 ```
 
-### 5) Production build
+### 4) Production build
 
 ```bash
 npm run build
 ```
 
-### 6) Start the production server
+### 5) Start the production server
 
 ```bash
 npm run start
 ```
 
-### 7) Linting
+### 6) Linting
 
 ```bash
 npm run lint
 ```
 
-## Environment Variables
+## Data Source
 
-The project references environment variables for MongoDB in the database setup code.
-
-```env
-MONGODB_URI=your_mongodb_uri_here
-MONGODB_DB=bizlink-ai
-```
-
-> Do not commit real credentials, tokens, or connection strings to the repository.
+The current app uses local static seed data in `lib/seed-data.ts` for packaging materials, boxes, accessories, suppliers, businesses, guides, and eco alternatives.
 
 ## Example Searches
 
